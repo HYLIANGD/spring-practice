@@ -12,7 +12,7 @@ import com.hy.springpractice.model.SuperInsurance;
 import com.hy.springpractice.model.TrafficInsurance;
 
 @Configuration
-@ComponentScan("com.hy")
+@ComponentScan("com.hy.model")
 public class MotoConfig {
 	
 	@Bean
