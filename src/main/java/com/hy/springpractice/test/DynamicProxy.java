@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import com.hy.springpractice.container.CustomBeanFactory;
 import com.hy.springpractice.container.CustomBeanFactoryImpl;
-import com.hy.springpractice.container.ProxyUtil;
+import com.hy.springpractice.container.DynamicProxyUtil;
 import com.hy.springpractice.model.autowired.Insurance;
 import com.hy.springpractice.model.autowired.Moto;
 import com.hy.springpractice.model.autowired.SportBike;
@@ -14,12 +14,12 @@ public class DynamicProxy {
 	
 	@Test
 	public void test() throws Exception {
-		CustomBeanFactory dynamicProxy = (CustomBeanFactory) ProxyUtil.getDynamicProxy(new CustomBeanFactoryImpl());
+		CustomBeanFactory dynamicProxy = (CustomBeanFactory) DynamicProxyUtil.getDynamicProxy(new CustomBeanFactoryImpl());
 		Moto sportBike = dynamicProxy.getBean("bike", SportBike.class);
 		System.out.println(sportBike.getClass());
 		System.out.println(sportBike.getInsurance());
 		
-		Insurance dynamicProxy2 = (Insurance) ProxyUtil.getDynamicProxy(new SuperInsurance());
+		Insurance dynamicProxy2 = (Insurance) DynamicProxyUtil.getDynamicProxy(new SuperInsurance());
 		String insuranceContent = dynamicProxy2.getInsuranceContent();
 		System.out.println(insuranceContent);
 	}

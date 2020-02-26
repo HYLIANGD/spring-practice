@@ -4,7 +4,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public class ProxyUtil {
+
+public class DynamicProxyUtil{
 	
 	public static Object getDynamicProxy(Object realSubject) {
 		
@@ -13,8 +14,7 @@ public class ProxyUtil {
 		return Proxy.newProxyInstance(realSubject.getClass().getClassLoader(), 
 				realSubject.getClass().getInterfaces(), 
 				customInvocationHandler);
-	}
-	
+	}	
 }
 
 class CustomInvocationHandler implements InvocationHandler{
