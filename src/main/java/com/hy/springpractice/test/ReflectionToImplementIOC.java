@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import com.hy.springpractice.container.CustomBeanFactory;
 import com.hy.springpractice.container.CustomContext;
-import com.hy.springpractice.model.autowired.Insurance;
-import com.hy.springpractice.model.autowired.Moto;
-import com.hy.springpractice.model.autowired.Scooter;
-import com.hy.springpractice.model.autowired.SportBike;
-import com.hy.springpractice.model.autowired.TrafficInsurance;
+import com.hy.springpractice.model.autowired.InsuranceAutowired;
+import com.hy.springpractice.model.autowired.MotoAutowired;
+import com.hy.springpractice.model.autowired.ScooterAutowired;
+import com.hy.springpractice.model.autowired.SportBikeAutowired;
+import com.hy.springpractice.model.autowired.TrafficInsuranceAutowired;
 
 public class ReflectionToImplementIOC {
 	
@@ -23,15 +23,15 @@ public class ReflectionToImplementIOC {
 	public void test() throws Exception {
 		CustomBeanFactory context = new CustomContext();
 		
-		Moto mySportBike = context.getBean("BeanId", SportBike.class);
+		MotoAutowired mySportBike = context.getBean("BeanId", SportBikeAutowired.class);
 		System.out.println(mySportBike.getClass());
 		System.out.println(mySportBike.getInsurance());
 		
-		Moto myScooter = context.getBean("BeanId", Scooter.class);
+		MotoAutowired myScooter = context.getBean("BeanId", ScooterAutowired.class);
 		System.out.println(myScooter.getClass());
 		System.out.println(myScooter.getInsurance());
 		
-		Insurance insurance = context.getBean("insurance", TrafficInsurance.class);
+		InsuranceAutowired insurance = context.getBean("insurance", TrafficInsuranceAutowired.class);
 		System.out.println(insurance);
 	}
 	

@@ -6,16 +6,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 //@Scope("prototype")
-public class SportBike extends Moto {
+public class SportBikeAutowired extends MotoAutowired {
 
 	private String trackRecord;
 	private String certificationLevel;
 
-	public SportBike() {
+	public SportBikeAutowired() {
 	}
 	
 	@Autowired
-	public SportBike(@Qualifier("superInsurance") Insurance insurance) {
+	public SportBikeAutowired(@Qualifier("superInsuranceAutowired") InsuranceAutowired insurance) {
 		super(insurance);
 	}
 

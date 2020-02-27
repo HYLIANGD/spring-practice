@@ -3,20 +3,18 @@ package com.hy.springpractice.model.autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SuperInsurance implements Insurance{
-	
-	public SuperInsurance() {
-		// TODO Auto-generated constructor stub
-	}
+public class TrafficInsuranceAutowired implements InsuranceAutowired {
 	
 	@Override
 	public String getInsuranceContent() {
-		return "Cover everything";
+		return "This insurance only include traffic accident";
 	}
 
 	@Override
 	public Integer getInsuraceFee() {
-		return 100000;
+		return 1000;
 	}
+
+	
 
 }

@@ -5,15 +5,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Scooter extends Moto{
+public class ScooterAutowired extends MotoAutowired{
 	
 	private int trunk;
 	
-	public Scooter() {
+	public ScooterAutowired() {
 	}
 	
 	@Autowired
-	public Scooter(@Qualifier("trafficInsurance") Insurance insurance) {
+	public ScooterAutowired(@Qualifier("trafficInsuranceAutowired") InsuranceAutowired insurance) {
 		super(insurance);
 	}
 

@@ -2,8 +2,8 @@ package com.hy.springpractice.test;
 
 import org.junit.Test;
 
-import com.hy.springpractice.container.CglibProxyUtil;
 import com.hy.springpractice.model.Person;
+import com.hy.springpractice.proxy.CglibProxyUtil;
 
 public class CglibProxy {
 	

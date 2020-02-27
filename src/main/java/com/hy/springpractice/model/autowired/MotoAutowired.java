@@ -3,18 +3,18 @@ package com.hy.springpractice.model.autowired;
 
 
 
-public abstract class Moto {
+public abstract class MotoAutowired {
 	
 	private String brand;
 	private String modelName;
 	private int displacement;
-	private Insurance insurance;
+	private InsuranceAutowired insurance;
 	
-	public Moto() {
+	public MotoAutowired() {
 		super();
 	}
 	
-	public Moto(Insurance insurance) {
+	public MotoAutowired(InsuranceAutowired insurance) {
 		super();
 		this.insurance = insurance;
 	}
@@ -37,10 +37,10 @@ public abstract class Moto {
 	public void setDisplacement(int displacement) {
 		this.displacement = displacement;
 	}
-	public Insurance getInsurance() {
+	public InsuranceAutowired getInsurance() {
 		return insurance;
 	}
-	public void setInsurance(Insurance insurance) {
+	public void setInsurance(InsuranceAutowired insurance) {
 		this.insurance = insurance;
 	}
 	

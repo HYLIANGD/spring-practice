@@ -3,22 +3,22 @@ package com.hy.springpractice.test;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.hy.springpractice.config.autowired.MotoConfig;
-import com.hy.springpractice.model.autowired.Moto;
-import com.hy.springpractice.model.autowired.Scooter;
-import com.hy.springpractice.model.autowired.SportBike;
+import com.hy.springpractice.config.autowired.MotoConfigAutowired;
+import com.hy.springpractice.model.autowired.MotoAutowired;
+import com.hy.springpractice.model.autowired.ScooterAutowired;
+import com.hy.springpractice.model.autowired.SportBikeAutowired;
 
 public class IOCUsIngAutowired {
 
 	@Test
 	public void test() {
 		AnnotationConfigApplicationContext context =
-				new AnnotationConfigApplicationContext(MotoConfig.class);
-		Moto johnSportBike = context.getBean(SportBike.class);
+				new AnnotationConfigApplicationContext(MotoConfigAutowired.class);
+		MotoAutowired johnSportBike = context.getBean(SportBikeAutowired.class);
 		System.out.print("Sport bike insurance: ");
 		System.out.println(johnSportBike.getInsurance().getInsuranceContent());
 		
-		Moto johnScooter = context.getBean(Scooter.class);
+		MotoAutowired johnScooter = context.getBean(ScooterAutowired.class);
 		System.out.print("Scooter insurance: ");
 		System.out.println(johnScooter.getInsurance().getInsuranceContent());
 		
@@ -30,7 +30,7 @@ public class IOCUsIngAutowired {
 		System.out.println("johnSportBike brand = " + johnSportBike.getBrand() );
 		
 		System.out.println("Container created new bike to Ray");
-		Moto raySportBike = context.getBean(SportBike.class);
+		MotoAutowired raySportBike = context.getBean(SportBikeAutowired.class);
 		System.out.println("raySportBike brand = " + raySportBike.getBrand());
 		
 		
