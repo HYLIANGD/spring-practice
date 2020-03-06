@@ -45,7 +45,7 @@ dependencies {
 docker {
     dependsOn build
     name "${bootJar.baseName}"
-    tags 'latest'
+    tags 'spring-practice-app'
     files bootJar.archivePath
     buildArgs("JAR_FILE": "${bootJar.archiveName}")
 }
