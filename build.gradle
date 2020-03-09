@@ -1,8 +1,22 @@
+buildscript {
+	repositories {	
+		maven {
+	       url "https://plugins.gradle.org/m2/"
+	    }
+		mavenCentral()
+	}
+	dependencies {
+		classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.22.0')
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.2.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 }
+
+apply plugin: 'com.palantir.docker'
 
 group = 'com.hy'
 version = '0.0.1-SNAPSHOT'
@@ -12,16 +26,27 @@ repositories {
 	mavenCentral()
 }
 
+bootJar {
+    baseName = 'spring-practice-app'
+    version =  '1.0.0'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+	implementation 'org.junit.vintage:junit-vintage-engine:5.6.0'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.2.5.RELEASE'
 	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
 
-test {
-	useJUnitPlatform()
+docker {
+    dependsOn build
+    name "${bootJar.baseName}"
+    tags 'spring-practice-app'
+    files bootJar.archivePath
+    buildArgs("JAR_FILE": "${bootJar.archiveName}")
 }
+
