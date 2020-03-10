@@ -3,6 +3,7 @@ package com.hy.springpractice.model;
 
 public abstract class Moto {
 	
+	private Long id;
 	private String brand;
 	private String modelName;
 	private int displacement;
@@ -15,6 +16,16 @@ public abstract class Moto {
 	public Moto(Insurance insurance) {
 		super();
 		this.insurance = insurance;
+	}
+	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getBrand() {
