@@ -17,7 +17,7 @@ import com.hy.springpractice.model.autowired.SportBikeAutowired;
 public class MotoController {
 
 //	@GetMapping
-//	public MotoAutowired getOneSportBike(@RequestParam(value ="displacement", required = false)Integer displacement) {
+//	public MotoAutowired getOneSportBike(@Param(value ="displacement")Integer displacement) {
 //		MotoAutowired moto = new SportBikeAutowired();
 //		UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //		moto.setBrand(principal.getUsername());
@@ -38,5 +38,7 @@ public class MotoController {
 		moto.setDisplacement(displacement);
 		return moto;
 	}
+	
+	
 	
 }

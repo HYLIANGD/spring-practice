@@ -13,8 +13,8 @@ CREATE TABLE `motos`(
 `trackrecord` varchar(45) default null,
 `certificationlevel` varchar(45) default null,
 `trunk` int(3) default null,
-PRIMARY KEY (`id`),
-CONSTRAINT `insurance_ibfk_1` FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (`id`)
+PRIMARY KEY (`id`)
+-- CONSTRAINT `insurance_ibfk_1` FOREIGN KEY (`insurance_id`) REFERENCES `insurance` (`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `motos` VALUES
