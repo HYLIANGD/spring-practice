@@ -1,5 +1,8 @@
 package com.hy.springpractice.model;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,12 +11,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "city")
-public class City {
+public class City implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
+	@Column(name="countrycode")
 	private String countryCode;
 	private String district;
 	private Long population;
