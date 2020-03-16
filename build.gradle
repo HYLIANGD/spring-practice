@@ -14,9 +14,8 @@ plugins {
 	id 'org.springframework.boot' version '2.2.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id 'com.palantir.docker' version '0.22.0'
 }
-
-apply plugin: 'com.palantir.docker'
 
 group = 'com.hy'
 version = '0.0.1-SNAPSHOT'
@@ -35,12 +34,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.junit.vintage:junit-vintage-engine:5.6.0'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.2.5.RELEASE'
-	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.2.4.RELEASE'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.2.5.RELEASE'
-	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.2.5.RELEASE'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.slf4j:slf4j-api'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'mysql:mysql-connector-java'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
