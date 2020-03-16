@@ -1,5 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `userdb`;
-USE `userdb`;
+USE `world`;
 
 DROP TABLE IF EXISTS `level_authorities`;
 DROP TABLE IF EXISTS `role_authorities`;
@@ -8,7 +7,7 @@ DROP TABLE IF EXISTS `my_users`;
 CREATE TABLE `my_users`(
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `theusername` varchar(20) NOT NULL UNIQUE,
-`thepassword` varchar(55) NOT NULL,
+`thepassword` varchar(68) NOT NULL,
 PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -29,10 +28,10 @@ CONSTRAINT `role_authorities_fk` FOREIGN KEY (`userid`) REFERENCES `my_users` (`
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `my_users` VALUES
-(1, 'john', '123'),
-(2, 'tim', '123'),
-(3, 'ray', '123'),
-(4, 'dad', '123');
+(1, 'john', '{bcrypt}$2y$12$vUmjZXwX5aRLuUw1jpEcvOU81KmKh2/aMvsI9bOAcwTPVlSxyfUQS'),
+(2, 'tim', '{bcrypt}$2y$12$vUmjZXwX5aRLuUw1jpEcvOU81KmKh2/aMvsI9bOAcwTPVlSxyfUQS'),
+(3, 'ray', '{bcrypt}$2y$12$vUmjZXwX5aRLuUw1jpEcvOU81KmKh2/aMvsI9bOAcwTPVlSxyfUQS'),
+(4, 'dad', '{bcrypt}$2y$12$vUmjZXwX5aRLuUw1jpEcvOU81KmKh2/aMvsI9bOAcwTPVlSxyfUQS');
 
 INSERT INTO `level_authorities` VALUES
 (1,1,'LEVEL_A'),

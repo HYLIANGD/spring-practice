@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "country", schema = "world", catalog = "world")
+@Table(name = "country")
 //問題: 反序列化fail
 @JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class Country {
