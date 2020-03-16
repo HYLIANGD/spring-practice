@@ -3,6 +3,7 @@ package com.hy.springpractice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hy.springpractice.model.City;
+import com.hy.springpractice.repository.CityRepository;
 import com.hy.springpractice.service.CityService;
 
 @RestController
-@RequestMapping("/city")
+@RequestMapping("/cities")
 public class CityController {
 	
 	/*
@@ -83,6 +85,11 @@ public class CityController {
 	public String deleteCity(@PathVariable("id") Long id) {
 		cityService.deleteCity(id);
 		return "Delete done";
+	}
+	
+	@GetMapping("/search")
+	public City getCityByName(@Param("name") String name){
+		return cityService.getCityByName(name);
 	}
 	
 }

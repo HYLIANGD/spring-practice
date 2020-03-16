@@ -40,7 +40,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'mysql:mysql-connector-java'
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }

@@ -14,6 +14,8 @@ public interface CityRepository extends JpaRepository<City,Long>{
 	
 	City getById(Long id);
 	
+	City findByName(String name);
+	
 	List<City> findByIdLessThanOrderByNameDesc(Long val);
 	
 	Long countByNameContaining(String name);
