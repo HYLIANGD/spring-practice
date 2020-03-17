@@ -9,6 +9,7 @@
 <div class="jumbotron">
   <h1>Welcome</h1>
 </div>
+	<p th:if="${#authentication != 'anonymousUser'}"><a href="#">Hello<span class="sr-only">(current)</span></a></p>
 	<p><a class="btn btn-primary btn-lg" href="/motos" role="button">Take a Moto</a></p>
 	<form th:action="@{/motos}" method="GET">
 	<div class="form-group">
@@ -17,12 +18,13 @@
     	<input type="submit" value="submit" class="btn btn-default">
 	</div>
 	</form>
-	
 	<form th:action="@{/logout}" method="POST">
-	<div class="form-group">
+	<div sec:authorize="isAuthenticated()" class="form-group">
     	<input type="submit" value="logout" class="btn btn-default">
 	</div>
 	</form>
+	
+	<span sec:authentication="name"></span>
 	
 </div>
 

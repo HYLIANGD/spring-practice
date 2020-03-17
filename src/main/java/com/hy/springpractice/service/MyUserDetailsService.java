@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.hy.springpractice.model.Level;
 import com.hy.springpractice.model.MyUserDetails;
 import com.hy.springpractice.model.Role;
 import com.hy.springpractice.model.User;
@@ -37,6 +38,11 @@ public class MyUserDetailsService implements UserDetailsService {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		for(Role role : roles) {
 			authorities.add(new SimpleGrantedAuthority(role.getTherole()));
+		}
+		
+		List<Level> levels = user.get().getLevels();
+		for(Level level : levels) {
+			authorities.add(new SimpleGrantedAuthority(level.getThelevel()));
 		}
 		
 		return new MyUserDetails(user.get(), authorities);

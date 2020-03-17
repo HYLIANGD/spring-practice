@@ -40,7 +40,6 @@ INSERT INTO `level_authorities` VALUES
 (4,2,'LEVEL_B'),
 (5,2,'LEVEL_C'),
 (6,3,'LEVEL_C'),
-(7,4,'LEVEL_A'),
 (8,4,'LEVEL_B'),
 (9,4,'LEVEL_C');
 

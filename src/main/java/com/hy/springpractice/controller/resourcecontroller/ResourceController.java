@@ -1,5 +1,6 @@
 package com.hy.springpractice.controller.resourcecontroller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ResourceController {
 	
 	@GetMapping
-	public String getIndex() {
+	public String getIndex(Authentication authentication) {
 		return "index";
 	}
 	
