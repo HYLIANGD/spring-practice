@@ -28,10 +28,10 @@ CONSTRAINT `role_authorities_fk` FOREIGN KEY (`userid`) REFERENCES `my_users` (`
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `my_users` VALUES
-(1, 'john', '{bcrypt}$2y$12$vUmjZXwX5aRLuUw1jpEcvOU81KmKh2/aMvsI9bOAcwTPVlSxyfUQS'),
-(2, 'tim', '{bcrypt}$2y$12$vUmjZXwX5aRLuUw1jpEcvOU81KmKh2/aMvsI9bOAcwTPVlSxyfUQS'),
-(3, 'ray', '{bcrypt}$2y$12$vUmjZXwX5aRLuUw1jpEcvOU81KmKh2/aMvsI9bOAcwTPVlSxyfUQS'),
-(4, 'dad', '{bcrypt}$2y$12$vUmjZXwX5aRLuUw1jpEcvOU81KmKh2/aMvsI9bOAcwTPVlSxyfUQS');
+(1, 'john', '123'),
+(2, 'tim', '123'),
+(3, 'ray', '123'),
+(4, 'dad', '123');
 
 INSERT INTO `level_authorities` VALUES
 (1,1,'LEVEL_A'),

@@ -1,5 +1,6 @@
 package com.hy.springpractice.provider;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,6 +9,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+
+
 
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
@@ -20,8 +23,10 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		System.out.println("MyAuthenticationProvider開始執行");
 		UserDetails userDetails = myUserDetailService.loadUserByUsername(authentication.getName());
 		if(userDetails.getPassword().equals(authentication.getCredentials().toString())) {
-			return new UsernamePasswordAuthenticationToken(userDetails.getUsername(),userDetails.getPassword(), userDetails.getAuthorities());
+			System.out.println("userDetails and credentials匹配成功");
+			return new UsernamePasswordAuthenticationToken(userDetails.getUsername(),userDetails.getPassword(),userDetails.getAuthorities());
 		}else {
+			System.out.println("userDetails and credentials匹配失敗");
 			return null;
 		}
 	}

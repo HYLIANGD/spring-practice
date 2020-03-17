@@ -19,10 +19,11 @@ public class MyUserDetails implements UserDetails {
 	
 	
 	
-	public MyUserDetails(User user) {
+	public MyUserDetails(User user, List<GrantedAuthority> authorities) {
 		password = user.getThepassword();
 		username = user.getTheusername();
 		id = user.getId();
+		this.authorities = authorities;
 	}
 	
 

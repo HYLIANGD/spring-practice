@@ -1,10 +1,16 @@
 package com.hy.springpractice.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
 
+import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			.withUser("john")
 //			.password("123")
 //			.roles("admin");
+		System.out.println();
 		
 		auth.userDetailsService(myUserDetailsService)
 			.and()
@@ -46,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/").permitAll()
 			.antMatchers("/cities/**").permitAll()
 			.antMatchers("/countries/**").permitAll()
+			.antMatchers("/motos/**").hasRole("STAFF")
 			.anyRequest().authenticated()
 		.and()
 			.formLogin()
@@ -53,6 +61,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout().permitAll();
 		
 	}
+
+//	@Override
+//	protected AuthenticationManager authenticationManager() throws Exception {
+//		
+//		List<AuthenticationProvider> list = new ArrayList<>();
+//		list.add(myAuthenticationProvider);
+//		AuthenticationManager authenticationManager = new ProviderManager(list);
+//		return authenticationManager;
+//	}
+	
+	
 	
 
 }
