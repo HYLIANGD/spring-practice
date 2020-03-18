@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" 
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -9,20 +12,17 @@
 <div class="jumbotron">
   <h1>Welcome</h1>
 </div>
-	<p><a class="btn btn-primary btn-lg" href="/motos" role="button">Take a Moto</a></p>
-	<form th:action="@{/motos}" method="GET">
-	<div class="form-group">
-    	<label for="exampleInputName2">Displacement</label>
-    	<input type="text" class="form-control" id="exampleInputName2" placeholder="599" name="displacement">
-    	<input type="submit" value="submit" class="btn btn-default">
-	</div>
-	</form>
-	
+	<p><a class="btn btn-primary btn-lg" href="/login" role="button">DB Login</a></p>
+	<p><a class="btn btn-primary btn-lg" href="/iplogin" role="button">IP Login</a></p>
 	<form th:action="@{/logout}" method="POST">
-	<div class="form-group">
+	<div sec:authorize="isAuthenticated()" class="form-group">
     	<input type="submit" value="logout" class="btn btn-default">
 	</div>
 	</form>
+	
+	<div sec:authorize="isAuthenticated()">
+  This content is only shown to authenticated users.
+	</div>
 	
 </div>
 

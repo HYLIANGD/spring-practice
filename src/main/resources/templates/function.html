@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" 
-		xmlns:th="http://www.thymeleaf.org"
-		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -12,18 +9,16 @@
 <div class="jumbotron">
   <h1>Welcome</h1>
 </div>
-	<p><a class="btn btn-primary btn-lg" href="/login" role="button">DB Login</a></p>
-	<p><a class="btn btn-primary btn-lg" href="/iplogin" role="button">IP Login</a></p>
+	Logged user: <span sec:authentication="name">Bob</span>
+	Roles: <span sec:authentication="principal">[ROLE_USER, ROLE_ADMIN]</span>
+	<p><a class="btn btn-primary btn-lg" href="/cities" role="button">Get cities (STAFF only)</a></p>
+	<p><a class="btn btn-primary btn-lg" href="/cities/search?name=yyls" role="button">Get cities (STAFF and LEVEL_A authority only)</a></p>
+
 	<form th:action="@{/logout}" method="POST">
 	<div sec:authorize="isAuthenticated()" class="form-group">
     	<input type="submit" value="logout" class="btn btn-default">
 	</div>
 	</form>
-	
-	<div sec:authorize="isAuthenticated()">
-  This content is only shown to authenticated users.
-	</div>
-	
 </div>
 
 </body>

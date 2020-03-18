@@ -1,24 +1,27 @@
 package com.hy.springpractice.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.sql.DataSource;
 
-import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.hy.springpractice.filter.IpAuthenticationProcessingFilter;
 
 @EnableWebSecurity
 @ComponentScan("com.hy.springpractice.provider")
+//@PreAuthorize需要開啟
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -26,8 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService myUserDetailsService;
 	@Autowired
+	private AuthenticationProvider ipAuthenticationProvider;
+	@Autowired
 	private AuthenticationProvider myAuthenticationProvider;
-
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
@@ -40,7 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		auth.userDetailsService(myUserDetailsService)
 			.and()
-			.authenticationProvider(myAuthenticationProvider);
+			.authenticationProvider(myAuthenticationProvider)
+			.authenticationProvider(ipAuthenticationProvider);
+		
 	}
 
 	@Override
@@ -51,16 +58,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/css/**").permitAll()
 			.antMatchers("/js/**").permitAll()
 			.antMatchers("/").permitAll()
-			.antMatchers("/cities/**").permitAll()
+			.antMatchers("/denied").permitAll()
 			.antMatchers("/countries/**").permitAll()
-			.antMatchers("/motos/**").hasRole("STAFF")
+			.antMatchers("/iplogin/**").permitAll()
+//			.antMatchers("/cities/search**").access("hasRole('STAFF') and hasAuthority('LEVEL_A') ")
+//			.antMatchers("/cities/**").hasAnyRole("STAFF","MANAGER")
 			.anyRequest().authenticated()
 		.and()
 			.formLogin()
+			.defaultSuccessUrl("/function")
 		.and()
-			.logout().permitAll();
-		
+			.logout().permitAll()
+		.and()
+			.exceptionHandling().accessDeniedPage("/denied");
+			//.accessDeniedHandler(accessDeniedHandler);
+		//cors
+		//header
+		//entrypoint
+		http.addFilterBefore(getIpAuthenticationProcessingFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);
+		//add before at after
 	}
+	
+	public IpAuthenticationProcessingFilter getIpAuthenticationProcessingFilter(AuthenticationManager authenticationManager) {
+        IpAuthenticationProcessingFilter ipAuthenticationProcessingFilter = new IpAuthenticationProcessingFilter();
+        ipAuthenticationProcessingFilter.setAuthenticationManager(authenticationManager);
+        ipAuthenticationProcessingFilter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler("/?error=ipFail"));
+        ipAuthenticationProcessingFilter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler("/function"));
+        return ipAuthenticationProcessingFilter;
+    }
+	
 
 //	@Override
 //	protected AuthenticationManager authenticationManager() throws Exception {
