@@ -3,6 +3,7 @@ package com.hy.springpractice.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -12,11 +13,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.hy.springpractice.entrypoint.MyAuthEntryPoint;
 import com.hy.springpractice.filter.IpAuthenticationProcessingFilter;
+import com.hy.springpractice.handler.AuthFailHandler;
+import com.hy.springpractice.handler.MyAccessDeniedHandler;
 
 @EnableWebSecurity
 @ComponentScan("com.hy.springpractice.provider")
@@ -32,6 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private AuthenticationProvider ipAuthenticationProvider;
 	@Autowired
 	private AuthenticationProvider myAuthenticationProvider;
+	@Autowired
+	private AuthenticationEntryPoint myAuthEntryPoint;
+	
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -65,13 +75,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			.antMatchers("/cities/**").hasAnyRole("STAFF","MANAGER")
 			.anyRequest().authenticated()
 		.and()
+//			.httpBasic()
+//			.authenticationEntryPoint(myAuthEntryPoint)
+//		.and()
 			.formLogin()
 			.defaultSuccessUrl("/function")
+			.failureHandler(authFailHandler())
 		.and()
 			.logout().permitAll()
 		.and()
-			.exceptionHandling().accessDeniedPage("/denied");
-			//.accessDeniedHandler(accessDeniedHandler);
+			.exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+		//how to handle other exception
 		//cors
 		//header
 		//entrypoint
@@ -97,7 +111,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		return authenticationManager;
 //	}
 	
+	@Bean
+    public AuthenticationFailureHandler authFailHandler() {
+        return new AuthFailHandler();
+    }
 	
+	
+	@Bean
+    public MyAccessDeniedHandler accessDeniedHandler() {
+        return new MyAccessDeniedHandler();
+    }
 	
 
 }
